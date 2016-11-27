@@ -5,6 +5,7 @@ import ua.vtkachenko.task.dao.CityDao;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationService {
@@ -32,21 +33,26 @@ public class LocationService {
         return answer;
     }
 
-    public void locationByName(){
+    public ArrayList<String> locationByName(){
         CityDao cityDao = new CityDao();
         List<City> allData = cityDao.getAll(nameOfFile);
         Parser parser = new Parser();
+        ArrayList<String> stringResultList = new ArrayList<String>();
+        String resultString;
         for (int i = 0; i < allData.size(); i++) {
             City currentCity = allData.get(i);
             String respString = getJSONAnswer(currentCity);
             parser.parseJSON(currentCity, respString);
             String city = currentCity.getName();
             if (currentCity.getLocation() != null) {
-                System.out.println(city + " " + currentCity.getLocation().getLatitude()
-                        + " (latitude), " + currentCity.getLocation().getLongitude() + " (longitude)");
+                resultString = city + " " + currentCity.getLocation().getLatitude()
+                        + " (latitude), " + currentCity.getLocation().getLongitude() + " (longitude)";
             } else {
-                System.out.println("For '" + city + "' location not found.");
+                resultString = "For '" + city + "' location not found.";
             }
+            stringResultList.add(resultString);
         }
+        stringResultList.stream().forEach(System.out::println);
+        return stringResultList;
     }
 }

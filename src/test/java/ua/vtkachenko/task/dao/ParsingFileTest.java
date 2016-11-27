@@ -12,6 +12,7 @@ import java.util.List;
 public class ParsingFileTest {
 
     private List<City> sourceList;
+    private static final String FILE_PATH = "Data.txt";
 
     @Before
     public void setUp(){
@@ -24,19 +25,19 @@ public class ParsingFileTest {
     @Test
     public void equalLists() throws Exception {
         CityDao cityDao = new CityDao();
-        List<City> destinationList = cityDao.getAll("Data.txt");
+        List<City> destinationList = cityDao.getAll(FILE_PATH);
         Assertions.assertThat(equalLists(destinationList, sourceList)).isTrue();
     }
 
     @Test
     public void notEqualLists() throws Exception {
         CityDao cityDao = new CityDao();
-        List<City> destinationList = cityDao.getAll("Data.txt");
+        List<City> destinationList = cityDao.getAll(FILE_PATH);
         sourceList.add(new City("London"));
         Assertions.assertThat(equalLists(destinationList, sourceList)).isFalse();
     }
 
-    public  boolean equalLists(List<City> a, List<City> b){
+    public boolean equalLists(List<City> a, List<City> b){
         if ((a.size() != b.size()) || (a == null && b!= null) || (a != null && b== null)){
             return false;
         }

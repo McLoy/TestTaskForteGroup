@@ -8,6 +8,7 @@ public class ParserTest {
 
     private City city;
     private LocationService locationService;
+    private static final String FILE_PATH = "Data.txt";
 
     @Before
     public void setUp(){
@@ -24,7 +25,7 @@ public class ParserTest {
     @Test
     public void parseJSON() throws Exception {
         Parser parser = new Parser();
-        locationService = new LocationService("Data.txt");
+        locationService = new LocationService(FILE_PATH);
         parser.parseJSON(city, locationService.getJSONAnswer(city));
         Assertions.assertThat(city.getLocation()).isNotNull();
     }
