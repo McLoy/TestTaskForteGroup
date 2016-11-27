@@ -3,14 +3,21 @@ package ua.vtkachenko.task.entities;
 import ua.vtkachenko.task.dao.CityDao;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationService {
 
-    public static final String GOOGLE_SERVICE_URL = "https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=";
+    private static final String ENCODING = "US-ASCII";
+    private static final String GOOGLE_SERVICE_URL = "https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=";
+    private List<City> list;
     private String nameOfFile;
 
     public LocationService(String nameOfFile) {

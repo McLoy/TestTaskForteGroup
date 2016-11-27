@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityDao implements GenericDao {
+public class CityDao {
 
     private List<City> list;
     private static final String ENCODING = "US-ASCII";
@@ -22,7 +22,7 @@ public class CityDao implements GenericDao {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(fileName);
         if (resource != null) {
-        Path data = Paths.get(resource.getFile()).toAbsolutePath();
+            Path data = Paths.get(resource.getFile()).toAbsolutePath();
             Charset charset = Charset.forName(ENCODING);
             try (BufferedReader reader = Files.newBufferedReader(data, charset)) {
                 String line;
