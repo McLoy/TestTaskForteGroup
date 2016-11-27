@@ -24,7 +24,7 @@ public class ParserTest {
     @Test
     public void parseJSON() throws Exception {
         Parser parser = new Parser();
-        locationService = new LocationService();
+        locationService = new LocationService("Data.txt");
         parser.parseJSON(city, locationService.getJSONAnswer(city));
         Assertions.assertThat(city.getLocation()).isNotNull();
     }

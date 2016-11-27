@@ -16,12 +16,11 @@ public class CityDao implements GenericDao {
 
     private List<City> list;
     private static final String ENCODING = "US-ASCII";
-    private static final String FILE_NAME = "Data.txt";
 
-    public List<City> getAll() {
+    public List<City> getAll(String fileName) {
         list = new ArrayList<>();
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource(FILE_NAME);
+        URL resource = classLoader.getResource(fileName);
         if (resource != null) {
         Path data = Paths.get(resource.getFile()).toAbsolutePath();
             Charset charset = Charset.forName(ENCODING);
