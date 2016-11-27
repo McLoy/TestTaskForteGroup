@@ -42,7 +42,6 @@ public class City implements Comparable{
         if (o != null){
             if (o.getClass() == City.class){
                 String destName = ((City)o).getName();
-//                return d > o.d ? 1 : d == o.d ? 0 : -1;
                 return name.hashCode() > destName.hashCode() ? 1 : name.hashCode() == destName.hashCode() ? 0 : -1;
             }
         }
