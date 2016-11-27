@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CityDaoTest {
+public class ParsingFileTest {
 
     private List<City> sourceList;
 
@@ -22,17 +22,27 @@ public class CityDaoTest {
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void equalLists() throws Exception {
         CityDao cityDao = new CityDao();
         List<City> destinationList = cityDao.getAll("Data.txt");
         Assertions.assertThat(equalLists(destinationList, sourceList)).isTrue();
+    }
+
+    @Test
+    public void notEqualLists() throws Exception {
+        CityDao cityDao = new CityDao();
+        List<City> destinationList = cityDao.getAll("Data.txt");
+        sourceList.add(new City("London"));
+        Assertions.assertThat(equalLists(destinationList, sourceList)).isFalse();
     }
 
     public  boolean equalLists(List<City> a, List<City> b){
         if ((a.size() != b.size()) || (a == null && b!= null) || (a != null && b== null)){
             return false;
         }
-        if (a == null && b == null) return true;
+        if (a == null && b == null) {
+            return true;
+        }
         Collections.sort (a);
         Collections.sort (b);
         return a.equals(b);
